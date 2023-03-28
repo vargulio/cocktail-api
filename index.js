@@ -4,12 +4,18 @@ const mongoose = require('mongoose');
 const Users = require('./user.model');
 const Sessions = require('./session.model');
 const FavoriteCocktail = require('./favoriteCocktai.model');
+const cors = require('cors');
 
 const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb+srv://admin:admin@cluster0.m5cjunj.mongodb.net/cocktail_api?retryWrites=true&w=majority').then(res => {
   console.log('connected to mongo!');
 });
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -254,7 +260,7 @@ app.post('/logout', (req, res) => {
 
 // Start the server
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
+app.listen(PORT, '192.168.7.50', () => {
   console.log(`App listening on port ${PORT}`);
   console.log('Press Ctrl+C to quit.');
 });
