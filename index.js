@@ -45,7 +45,7 @@ app.post('/users', (req, res) => {
         if (!err) {
           res.status(200).send(result);
         } else {
-          res.status(500).send();
+          res.status(500).send({message: "The backend did it again..."});
         }
       })
 
@@ -240,7 +240,7 @@ app.post('/logout', (req, res) => {
   Sessions.findByIdAndRemove(id, (err, result) => {
 
     if (result) {
-      res.status(200).send();
+      res.status(200).send({message: 'Successful logout'});
     } else {
       res.status(400).send({ message: 'No session with this id' });
     }
